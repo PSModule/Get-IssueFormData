@@ -22,28 +22,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get issue file content
-        id: GetIssueBody
+        id: GetIssueFileContent
         shell: pwsh
         run: |
-          $issueBody = @'
-          ### Type with spaces
+          $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
 
-          Action
-
-          ### Multiline
-
-          test
-          is multi
-          line
-
-          ### OS
-
-          - [x] Windows
-          - [x] Linux
-          - [ ] macOS
-          '@
-          $issueBody = $issueBody -replace '`r`n', '`n'
-          "issueBody=$issueBody" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          $EOF = -join (1..15 | ForEach {[char]((48..57)+(65..90)+(97..122) | Get-Random)})
+          "issueFileContent<<$EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          $issueFileContent | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "$EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - uses: PSModule/Debug@v0
 
