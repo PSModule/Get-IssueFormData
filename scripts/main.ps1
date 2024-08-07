@@ -102,8 +102,11 @@ Write-Host '::endgroup::'
 Write-Host '::group::Issue Body Split'
 # Read the content of the file
 
-$results = Parse-IssueBody -IssueBody $IssueBody | Process-IssueBody
+$data = Parse-IssueBody -IssueBody $IssueBody | Process-IssueBody
 # Output the results
-$results | Format-Table -AutoSize
+$data | Format-Table -AutoSize
+
+$data | ConvertTo-Json -Compress
+"data=$data" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
 Write-Host '::endgroup::'
