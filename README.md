@@ -9,12 +9,6 @@ Bases itself on the definitions of GitHub Issue Forms:
 
 ## Usage
 
-### Inputs
-
-### Secrets
-
-### Outputs
-
 Provided the following issue body:
 
 ```md
@@ -40,7 +34,7 @@ a comment --> data parsed
 
 ```
 
-this action returns the following JSON object:
+This action returns the following JSON object:
 
 ```json
 {
@@ -54,6 +48,18 @@ this action returns the following JSON object:
     }
 }
 ```
+
+### Inputs
+
+| Name | Description | Default | Required |
+| ---- | ----------- | ------- | -------- |
+| IssueBody | The body of the issue | `${{ github.event.issue.body }}` | false |
+
+### Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| data | The parsed JSON object |
 
 ### Example
 
@@ -77,8 +83,12 @@ jobs:
         id: Get-IssueFormData
         uses: PSModule/Get-IssueFormData@v0
 
+      - name: Print data
+        shell: pwsh
+        env:
+          data: ${{ steps.Get-IssueFormData.outputs.data }}
+        run: |
+          $data = $env:data | ConvertFrom-Json
+          Write-Output $data
+
 ```
-
-## Inspiration
-
-- [zentered/issue-forms-body-parser](https://github.com/zentered/issue-forms-body-parser)
