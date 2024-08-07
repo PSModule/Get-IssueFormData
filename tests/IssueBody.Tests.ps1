@@ -2,7 +2,7 @@
     $data = $env:data | ConvertFrom-Json
 }
 
-Describe {
+Describe "IssueBody" {
     It "'Type with spaces' should contain 'Action'" {
         $data | Should -ContainKey 'Type with spaces'
         $data['Type with spaces'] | Should -Be 'Action'
