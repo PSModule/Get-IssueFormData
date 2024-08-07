@@ -22,12 +22,27 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get issue file content
-        id: GetIssueFileContent
+        id: GetIssueBody
         shell: pwsh
         run: |
-          $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
-          $issueFileContent = $issueFileContent -replace '`r`n', '`n'
-          "issueFileContent=$issueFileContent" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          $issueBody = @'
+          ### Type with spaces
+
+          Action
+
+          ### Multiline
+
+          test
+          is multi
+          line
+
+          ### OS
+
+          - [x] Windows
+          - [x] Linux
+          - [ ] macOS
+          '@
+          "issueBody=$issueBody" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - uses: PSModule/Debug@v0
 
