@@ -18,4 +18,4 @@ Example here
 
 ## Inspiration
 
-https://github.com/zentered/issue-forms-body-parser
+- [zentered/issue-forms-body-parser](https://github.com/zentered/issue-forms-body-parser)
