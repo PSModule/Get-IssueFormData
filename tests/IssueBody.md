@@ -7,6 +7,9 @@ Action
 
 test
 is multi
+<!--
+I dont want this to be parsed
+-->
 line
 
 ### OS

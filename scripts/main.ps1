@@ -20,6 +20,23 @@ function Parse-IssueBody {
 
     foreach ($line in $content) {
         Write-Verbose "Processing line: [$line]"
+        # Detect and skip comments
+        if ($line -match '^<!--(.+)-->$') {
+            continue
+        }
+        #Detect and skip multi-line comments
+        if ($line -match '^<!--$') {
+            $multiLineComment = $true
+            continue
+        }
+        if ($multiLineComment -and $line -match '-->$') {
+            $multiLineComment = $false
+            continue
+        }
+        if ($multiLineComment) {
+            continue
+        }
+
         if ($line -match '^### (.+)$') {
             # If a new header is found, store the current header and paragraph in the results
             if ($currentHeader -ne '') {
