@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### Type with spaces
 
 Action
@@ -13,3 +14,4 @@ line
 - [x] Windows
 - [x] Linux
 - [ ] macOS
+<!-- markdownlint-restore -->
