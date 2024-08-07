@@ -26,6 +26,7 @@ jobs:
         shell: pwsh
         run: |
           $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
+          $issueFileContent
           $issueFileContent | ForEach-Object {
             "issueFileContent=$_" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           }
