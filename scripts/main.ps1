@@ -94,7 +94,6 @@ filter Process-IssueBody {
     $data
 }
 
-$VerbosePreference = 'Continue'
 Write-Host '::group::Issue Body'
 $IssueBody
 Write-Host '::endgroup::'
@@ -107,6 +106,7 @@ $data = Parse-IssueBody -IssueBody $IssueBody | Process-IssueBody
 $data | Format-Table -AutoSize
 
 $data = $data | ConvertTo-Json -Compress
+$data
 "data=$data" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
 Write-Host '::endgroup::'
