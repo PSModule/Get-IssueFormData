@@ -4,6 +4,22 @@ param(
     [string] $IssueBody = $env:GITHUB_ACTION_INPUT_IssueBody
 )
 
+filter Remove-MarkdownComments {
+    [OutputType([string])]
+    [CmdletBinding()]
+    param(
+        [Parameter(
+            Mandatory,
+            ValueFromPipeline
+        )]
+        [string] $Markdown
+    )
+    $commentPattern = '<!--[\s\S]*?-->'
+    $content = $Markdown
+    $content = $Markdown -replace $commentPattern
+    $content
+}
+
 function Parse-IssueBody {
     [OutputType([PSCustomObject[]])]
     [CmdletBinding()]
@@ -11,8 +27,8 @@ function Parse-IssueBody {
         [Parameter()]
         [string] $IssueBody
     )
-
-    $content = $IssueBody.Split([Environment]::NewLine).Trim() | Where-Object { $_ -ne '' }
+    $content = $IssueBody | Remove-MarkdownComments
+    $content = $content.Split([Environment]::NewLine).Trim() | Where-Object { $_ -ne '' }
 
     $results = @()
     $currentHeader = ''
@@ -20,22 +36,6 @@ function Parse-IssueBody {
 
     foreach ($line in $content) {
         Write-Verbose "Processing line: [$line]"
-        # Detect and skip comments
-        if ($line -match '^<!--(.+)-->$') {
-            continue
-        }
-        #Detect and skip multi-line comments
-        if ($line -match '^<!--$') {
-            $multiLineComment = $true
-            continue
-        }
-        if ($multiLineComment -and $line -match '-->$') {
-            $multiLineComment = $false
-            continue
-        }
-        if ($multiLineComment) {
-            continue
-        }
 
         if ($line -match '^### (.+)$') {
             # If a new header is found, store the current header and paragraph in the results

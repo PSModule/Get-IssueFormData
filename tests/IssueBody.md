@@ -9,8 +9,7 @@ test
 is multi
 <!--
 I dont want this to be parsed
--->
-line
+but i want the stuff at the end here --> line
 
 ### OS
 
