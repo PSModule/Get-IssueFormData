@@ -33,6 +33,7 @@ jobs:
           "$EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - uses: PSModule/Debug@v0
+        if: always()
 
       - name: Action-Test
         id: Action-Test

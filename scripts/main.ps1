@@ -45,10 +45,10 @@ function Parse-IssueBody {
             Paragraph = $currentParagraph.Trim()
         }
     }
-    $results
+    $results | ConvertTo-Json
 }
 
-function Process-IssueBody {
+filter Process-IssueBody {
     [OutputType([hashtable])]
     [CmdletBinding()]
     param(
