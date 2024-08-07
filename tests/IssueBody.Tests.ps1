@@ -23,10 +23,8 @@ line
     It "'OS' should contain a hashtable with 3 items" {
         Write-Verbose ($data['OS'] | Out-String) -Verbose
         $data.Keys | Should -Contain 'OS'
-        $data['OS'] | Should -Be @{
-            Windows = $true
-            Linux   = $true
-            macOS   = $false
-        }
+        $data['OS'].Windows | Should -BeTrue
+        $data['OS'].Linux | Should -BeTrue
+        $data['OS'].Mac | Should -BeFalse
     }
 }
