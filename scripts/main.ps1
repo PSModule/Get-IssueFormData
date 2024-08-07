@@ -20,11 +20,14 @@ filter Remove-MarkdownComments {
     $content
 }
 
-function Parse-IssueBody {
+filter Parse-IssueBody {
     [OutputType([PSCustomObject[]])]
     [CmdletBinding()]
     param(
-        [Parameter()]
+        [Parameter(
+            Mandatory,
+            ValueFromPipeline
+        )]
         [string] $IssueBody
     )
     $content = $IssueBody | Remove-MarkdownComments
@@ -118,7 +121,7 @@ Write-Host '::endgroup::'
 Write-Host '::group::Issue Body Split'
 # Read the content of the file
 
-$data = Parse-IssueBody -IssueBody $IssueBody | Process-IssueBody
+$data = $IssueBody | Parse-IssueBody | Process-IssueBody
 # Output the results
 $data | Format-Table -AutoSize
 
