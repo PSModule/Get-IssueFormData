@@ -42,6 +42,7 @@ jobs:
           - [x] Linux
           - [ ] macOS
           '@
+          $issueBody = $issueBody -replace '`r`n', '`n'
           "issueBody=$issueBody" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - uses: PSModule/Debug@v0
