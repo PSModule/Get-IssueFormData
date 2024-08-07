@@ -1,27 +1,29 @@
-name: '{{ NAME }}'
-description: '{{ DESCRIPTION }}'
+name: Get-IssueFormData
+description: Get the data from a issue that was generated based on a issue form
 author: PSModule
 branding:
   icon: upload-cloud
   color: white
 
 inputs:
-  working-directory:
-    description: The working directory where Terraform will be executed
+  IssueBody:
+    description: The body of the issue
     required: false
-  subject:
-    description: The subject to greet
-    required: false
-    default: World
+    default: ${{ github.event.issue.body }}
+
+outputs:
+  data:
+    description: The data from the issue body
+    value: ${{ steps.Get-IssueFormData.outputs.data }}
 
 runs:
   using: composite
   steps:
-    - name: '{{ NAME }}'
+    - name: Get-IssueFormData
+      id: Get-IssueFormData
       shell: pwsh
-      working-directory: ${{ inputs.working-directory }}
       env:
-        GITHUB_ACTION_INPUT_subject: ${{ inputs.subject }}
+        GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
       run: |
-        # '{{ NAME }}'
+        # Get-IssueFormData
         . "$env:GITHUB_ACTION_PATH\scripts\main.ps1" -Verbose
