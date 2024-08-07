@@ -9,32 +9,86 @@ Bases itself on the definitions of GitHub Issue Forms:
 
 ## Usage
 
-### Inputs
+Provided the following issue body:
 
-### Secrets
+```md
+### Name
 
-### Outputs
+Name provided in the issue.
 
-The data structure that is returned is a JSON object that contains the following properties:
+### Language
+
+PowerShell
+
+### Rationale
+
+I need the
+<!-- This is
+a comment --> data parsed
+
+### OS
+
+- [ ] macOS
+- [x] Ubuntu
+- [x] Windows
+
+```
+
+This action returns the following JSON object:
 
 ```json
 {
-    "<header1>": "<value1>",                           // input
-    "<header2>": "<value2>",                           // dropdown
-    "<header3>": "<value3.1>\n<value3.2>\n<value3.3>", // textarea
-    "<header4>": {                                     // checkbox
-        "<valuename>": true,
-        "<valuename>": false
+    "Name": "Name provided in the issue.",  // input
+    "Language": "PowerShell",               // dropdown
+    "Rationale": "I need the\ndata parsed", // textarea
+    "OS": {                          // checkbox
+        "macOS": false,
+        "Ubuntu": true,
+        "Windows": true
     }
 }
 ```
 
+### Inputs
+
+| Name | Description | Default | Required |
+| ---- | ----------- | ------- | -------- |
+| IssueBody | The body of the issue | `${{ github.event.issue.body }}` | false |
+
+### Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| data | The parsed JSON object |
+
 ### Example
 
 ```yaml
-Example here
+name: Example workflow
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  assign:
+    name: Process issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get-IssueFormData
+        id: Get-IssueFormData
+        uses: PSModule/Get-IssueFormData@v0
+
+      - name: Print data
+        shell: pwsh
+        env:
+          data: ${{ steps.Get-IssueFormData.outputs.data }}
+        run: |
+          $data = $env:data | ConvertFrom-Json
+          Write-Output $data
+
 ```
-
-## Inspiration
-
-- [zentered/issue-forms-body-parser](https://github.com/zentered/issue-forms-body-parser)
