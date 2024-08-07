@@ -1,5 +1,6 @@
 ﻿BeforeAll {
     $data = $env:data | ConvertFrom-Json
+    Write-Verbose ($data | Out-String) -Verbose
 }
 
 Describe "IssueBody" {
