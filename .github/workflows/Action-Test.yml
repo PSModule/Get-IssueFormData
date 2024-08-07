@@ -22,11 +22,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get issue file content
-        id: GetIssueFileContent
         shell: pwsh
         run: |
           $issueFileContent = Get-Content -Path tests/IssueBody.md
-          "issueFileContent=$issueFileContent" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "issueFileContent=$issueFileContent" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - uses: PSModule/Debug@v0
 
       - name: Action-Test
         id: Action-Test
