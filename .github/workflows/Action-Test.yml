@@ -25,7 +25,7 @@ jobs:
         id: GetIssueFileContent
         shell: pwsh
         run: |
-          $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
+          $issueFileContent = Get-Content -Path tests/IssueBody.md
           "issueFileContent=$issueFileContent" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Action-Test
