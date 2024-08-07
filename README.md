@@ -15,3 +15,7 @@ A template repository for GitHub Actions
 ```yaml
 Example here
 ```
+
+## Inspiration
+
+https://github.com/zentered/issue-forms-body-parser
