@@ -1,5 +1,5 @@
 ﻿BeforeAll {
-    $data = $env:data | ConvertFrom-Json
+    $data = $env:data | ConvertFrom-Json -AsHashtable
     Write-Verbose ($data | Out-String) -Verbose
 }
 
