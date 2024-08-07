@@ -21,8 +21,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Get issue file content
+        id: GetIssueFileContent
+        shell: pwsh
+        run: |
+          $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
+          "issueFileContent=$issueFileContent" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
       - name: Action-Test
+        id: Action-Test
         uses: ./
         with:
-          working-directory: ./tests
-          subject: PSModule
+          IssueBody: ${{ steps.GetIssueFileContent.outputs.issueFileContent }}
+
+      - name: Action-Test-Results
+        shell: pwsh
+        env:
+          data: ${{ steps.Action-Test.outputs.data }}
+        run: |
+          Invoke-Pester -Path tests
