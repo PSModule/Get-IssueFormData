@@ -106,7 +106,7 @@ $data = Parse-IssueBody -IssueBody $IssueBody | Process-IssueBody
 # Output the results
 $data | Format-Table -AutoSize
 
-$data | ConvertTo-Json -Compress
+$data = $data | ConvertTo-Json -Compress
 "data=$data" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
 Write-Host '::endgroup::'
