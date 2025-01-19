@@ -25,4 +25,6 @@ runs:
       env:
         GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
       with:
+        Debug: true
+        Verbose: true
         Script: . (Join-Path -Path '${{ github.action_path }}' -ChildPath 'scripts\main.ps1')
