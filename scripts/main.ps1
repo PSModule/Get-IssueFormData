@@ -114,19 +114,15 @@ filter Process-IssueBody {
     $data
 }
 
-Write-Host '::group::Issue Body'
-$IssueBody
-Write-Host '::endgroup::'
+LogGroup 'Issue Body' {
+    Write-Output $IssueBody
+}
 
-Write-Host '::group::Issue Body Split'
-# Read the content of the file
-
-$data = $IssueBody | Parse-IssueBody | Process-IssueBody
-# Output the results
-$data | Format-Table -AutoSize
-
-$data = $data | ConvertTo-Json -Compress
-$data
-"data=$data" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
-Write-Host '::endgroup::'
+LogGroup 'Issue Body Split' {
+    $data = $IssueBody | Parse-IssueBody | Process-IssueBody
+    # Output the results
+    $data | Format-Table -AutoSize
+    $data = $data | ConvertTo-Json -Compress
+    Write-Output $data
+    Set-GitHubOutput -Name 'data' -Value $data
+}
