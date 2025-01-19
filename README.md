@@ -81,7 +81,7 @@ jobs:
     steps:
       - name: Get-IssueFormData
         id: Get-IssueFormData
-        uses: PSModule/Get-IssueFormData@v0
+        uses: PSModule/Get-IssueFormData@v1
 
       - name: Print data
         shell: pwsh
