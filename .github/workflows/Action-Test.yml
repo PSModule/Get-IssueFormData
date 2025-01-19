@@ -30,8 +30,11 @@ jobs:
         uses: PSModule/GitHub-Script@v1
         with:
           Script: |
-            $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
-            Set-GitHubOutput -Name 'issueFileContent' -Value $issueFileContent
+            LogGroup 'Get Issue File Content' {
+              $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
+              $issueFileContent
+              Set-GitHubOutput -Name 'issueFileContent' -Value $issueFileContent
+            }
 
       - name: Action-Test
         id: Action-Test
