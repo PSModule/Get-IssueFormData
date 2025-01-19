@@ -36,7 +36,6 @@ jobs:
         id: Action-Test
         uses: ./
         with:
-          ShowOutput: true
           IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results

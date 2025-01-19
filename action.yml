@@ -27,4 +27,5 @@ runs:
       with:
         Debug: true
         Verbose: true
+        ShowOutput: true
         Script: . (Join-Path -Path '${{ github.action_path }}' -ChildPath 'scripts\main.ps1')
