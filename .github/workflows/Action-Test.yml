@@ -27,7 +27,7 @@ jobs:
 
       - name: Get issue file content
         id: GetIssueFileContent
-        uses: GitHub-Script@v1
+        uses: PSModule/GitHub-Script@v1
         with:
           Script: |
             $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
