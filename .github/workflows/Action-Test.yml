@@ -27,23 +27,15 @@ jobs:
 
       - name: Get issue file content
         id: GetIssueFileContent
-        shell: pwsh
-        run: |
-          $issueFileContent = Get-Content -Path tests/IssueBody.md -Raw
-
-          $EOF = -join (1..15 | ForEach {[char]((48..57)+(65..90)+(97..122) | Get-Random)})
-          "issueFileContent<<$EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-          $issueFileContent | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-          "$EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
-      - uses: PSModule/Debug@v0
-        if: always()
+        uses: PSModule/GitHub-Script@v1
+        with:
+          Script: . '.\tests\Get-IssueFileContent.ps1'
 
       - name: Action-Test
         id: Action-Test
         uses: ./
         with:
-          IssueBody: ${{ steps.GetIssueFileContent.outputs.issueFileContent }}
+          IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results
         shell: pwsh

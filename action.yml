@@ -14,16 +14,15 @@ inputs:
 outputs:
   data:
     description: The data from the issue body
-    value: ${{ steps.Get-IssueFormData.outputs.data }}
+    value: ${{ fromJson(steps.Get-IssueFormData.outputs.result).data }}
 
 runs:
   using: composite
   steps:
     - name: Get-IssueFormData
       id: Get-IssueFormData
-      shell: pwsh
+      uses: PSModule/GitHub-Script@v1
       env:
         GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
-      run: |
-        # Get-IssueFormData
-        . "${{ github.action_path }}\scripts\main.ps1" -Verbose
+      with:
+        Script: . (Join-Path -Path '${{ github.action_path }}' -ChildPath 'scripts\main.ps1')
