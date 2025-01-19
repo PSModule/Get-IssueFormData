@@ -14,7 +14,7 @@ LogGroup 'Issue Body - Object' {
 }
 
 LogGroup 'Issue Body - JSON' {
-    $data = $data | ConvertTo-Json -Compress
+    # $data = $data | ConvertTo-Json -Compress
     $data | Format-Table -AutoSize
     Set-GitHubOutput -Name 'data' -Value $data
 }
