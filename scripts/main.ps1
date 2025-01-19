@@ -114,14 +114,16 @@ filter Process-IssueBody {
     $data
 }
 
-LogGroup 'Issue Body' {
+LogGroup 'Issue Body - Raw' {
     Write-Output $IssueBody
 }
 
-LogGroup 'Issue Body Split' {
+LogGroup 'Issue Body - Object' {
     $data = $IssueBody | Parse-IssueBody | Process-IssueBody
-    # Output the results
     $data | Format-Table -AutoSize
+}
+
+LogGroup 'Issue Body - JSON' {
     $data = $data | ConvertTo-Json -Compress
     Write-Output $data
     Set-GitHubOutput -Name 'data' -Value $data
