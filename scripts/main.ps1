@@ -120,9 +120,6 @@ LogGroup 'Issue Body' {
 
 LogGroup 'Issue Body Split' {
     $data = $IssueBody | Parse-IssueBody | Process-IssueBody
-    # Output the results
     $data | Format-Table -AutoSize
-    $data = $data | ConvertTo-Json -Compress
-    Write-Output $data
     Set-GitHubOutput -Name 'data' -Value $data
 }
