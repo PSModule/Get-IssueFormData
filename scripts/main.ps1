@@ -1,6 +1,6 @@
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
     'PSReviewUnusedParameter', 'IssueBody',
-    Justification = 'Variable scoping is '
+    Justification = 'Variable is used in LogGroup blocks.'
 )]
 [CmdletBinding()]
 param(
