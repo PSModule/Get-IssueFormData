@@ -1,3 +1,7 @@
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+    'PSReviewUnusedParameter', 'IssueBody',
+    Justification = 'Variable scoping is '
+)]
 [CmdletBinding()]
 param(
     [Parameter()]
@@ -10,11 +14,6 @@ LogGroup 'Issue Body - Raw' {
 
 LogGroup 'Issue Body - Object' {
     $data = $IssueBody | ConvertFrom-IssueForm
-    $data | Format-Table -AutoSize
-}
-
-LogGroup 'Issue Body - JSON' {
-    # $data = $data | ConvertTo-Json -Compress
-    $data | Format-Table -AutoSize
+    $data | Format-List
     Set-GitHubOutput -Name 'data' -Value $data
 }
