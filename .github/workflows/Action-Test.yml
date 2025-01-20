@@ -30,6 +30,7 @@ jobs:
         uses: PSModule/GitHub-Script@v1
         with:
           ShowOutput: true
+          Prerelease: true
           Script: . '.\tests\Get-IssueFileContent.ps1'
 
       - name: Action-Test
