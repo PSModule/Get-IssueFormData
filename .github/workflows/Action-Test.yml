@@ -29,6 +29,7 @@ jobs:
         id: GetIssueFileContent
         uses: PSModule/GitHub-Script@v1
         with:
+          ShowOutput: true
           Script: . '.\tests\Get-IssueFileContent.ps1'
 
       - name: Action-Test

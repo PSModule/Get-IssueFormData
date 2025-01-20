@@ -95,7 +95,7 @@ jobs:
 
 ## Alternatives
 
-[github/issue-parser](https://github.com/github/issue-parser)
-[issue-ops/parser](https://github.com/issue-ops/parser)
-[peter-murray/issue-forms-body-parser](https://github.com/peter-murray/issue-forms-body-parser)
-[peter-murray/issue-body-parser-action](https://github.com/peter-murray/issue-body-parser-action)
+- [github/issue-parser](https://github.com/github/issue-parser)
+- [issue-ops/parser](https://github.com/issue-ops/parser)
+- [peter-murray/issue-forms-body-parser](https://github.com/peter-murray/issue-forms-body-parser)
+- [peter-murray/issue-body-parser-action](https://github.com/peter-murray/issue-body-parser-action)
