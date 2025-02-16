@@ -30,7 +30,8 @@ jobs:
         uses: PSModule/GitHub-Script@v1
         with:
           ShowOutput: true
-          Script: . '.\tests\Get-IssueFileContent.ps1'
+          Script: |
+            tests/Get-IssueFileContent.ps1
 
       - name: Action-Test
         id: Action-Test
@@ -39,8 +40,6 @@ jobs:
           IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results
-        shell: pwsh
+        uses: PSModule/Invoke-Pester@v1
         env:
           data: ${{ steps.Action-Test.outputs.data }}
-        run: |
-          Invoke-Pester -Path tests
