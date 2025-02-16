@@ -39,8 +39,6 @@ jobs:
           IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results
-        shell: pwsh
+        uses: PSModule/Invoke-Pester@v1
         env:
           data: ${{ steps.Action-Test.outputs.data }}
-        run: |
-          Invoke-Pester -Path tests

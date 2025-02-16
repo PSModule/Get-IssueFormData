@@ -53,7 +53,7 @@ This action returns the following JSON object:
 
 | Name | Description | Default | Required |
 | ---- | ----------- | ------- | -------- |
-| IssueBody | The body of the issue | `${{ github.event.issue.body }}` | false |
+| IssueBody | The body of the issue, if not provided it will use the body of the issue that triggered the workflow. | `${{ github.event.issue.body }}` | false |
 
 ### Outputs
 
