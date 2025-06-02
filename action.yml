@@ -25,6 +25,7 @@ runs:
       env:
         GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
       with:
+        Token: ''
         ShowOutput: true
         Script: |
           # Get-IssueFormData
