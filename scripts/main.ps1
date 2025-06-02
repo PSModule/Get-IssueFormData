@@ -5,8 +5,6 @@
 [CmdletBinding()]
 param()
 
-$PSStyle.OutputRendering = 'Ansi'
-
 LogGroup 'Issue Body - Raw' {
     Write-Output $env:GITHUB_ACTION_INPUT_IssueBody
 }
