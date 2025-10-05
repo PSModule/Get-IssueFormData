@@ -40,6 +40,6 @@ jobs:
           IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results
-        uses: PSModule/Invoke-Pester@v1
+        uses: PSModule/Invoke-Pester@v4
         env:
           data: ${{ steps.Action-Test.outputs.data }}
