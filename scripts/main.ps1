@@ -1,4 +1,4 @@
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
     'PSReviewUnusedParameter', 'IssueBody',
     Justification = 'Variable is used in LogGroup blocks.'
 )]
