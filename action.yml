@@ -21,7 +21,7 @@ runs:
   steps:
     - name: Get-IssueFormData
       id: Get-IssueFormData
-      uses: PSModule/GitHub-Script@v1
+      uses: PSModule/GitHub-Script@2010983167dc7a41bcd84cb88e698ec18eccb7ca # v1.7.8
       env:
         GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
       with:
