@@ -1,5 +1,5 @@
 name: Get-IssueFormData
-description: Get the data from a issue that was generated based on a issue form
+description: Get the data from an issue that was generated based on an issue form
 author: PSModule
 branding:
   icon: upload-cloud
