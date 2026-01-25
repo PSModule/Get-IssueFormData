@@ -29,4 +29,4 @@ runs:
         ShowOutput: true
         Script: |
           # Get-IssueFormData
-          ${{ github.action_path }}/scripts/main.ps1
+          ${{ github.action_path }}/src/main.ps1
