@@ -1,5 +1,5 @@
 name: Get-IssueFormData
-description: Get the data from a issue that was generated based on a issue form
+description: Get the data from an issue that was generated based on an issue form
 author: PSModule
 branding:
   icon: upload-cloud
@@ -21,7 +21,7 @@ runs:
   steps:
     - name: Get-IssueFormData
       id: Get-IssueFormData
-      uses: PSModule/GitHub-Script@v1
+      uses: PSModule/GitHub-Script@0097f3bbe3f413f3b577b9bcc600727b0ca3201a # v1.7.10
       env:
         GITHUB_ACTION_INPUT_IssueBody: ${{ inputs.IssueBody }}
       with:
@@ -29,4 +29,4 @@ runs:
         ShowOutput: true
         Script: |
           # Get-IssueFormData
-          ${{ github.action_path }}/scripts/main.ps1
+          ${{ github.action_path }}/src/main.ps1
