@@ -23,13 +23,13 @@ jobs:
     steps:
       # Need to check out as part of the test, as its a local action
       - name: Checkout repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
       - name: Get issue file content
         id: GetIssueFileContent
-        uses: PSModule/GitHub-Script@0097f3bbe3f413f3b577b9bcc600727b0ca3201a # v1.7.10
+        uses: PSModule/GitHub-Script@8083ec1f733f00357ee4d0db0c6056686e483bc0 # v1.9.0
         with:
           ShowOutput: true
           Script: |
@@ -42,6 +42,6 @@ jobs:
           IssueBody: ${{ fromJson(steps.GetIssueFileContent.outputs.result).issueFileContent }}
 
       - name: Action-Test-Results
-        uses: PSModule/Invoke-Pester@abddf7bef0d0614d7ca322036af6a06ee0fb4d44 # v4.2.4
+        uses: PSModule/Invoke-Pester@4ff33199141fdf22568990b6107fe3148ae93a1c # v5.1.0
         env:
           data: ${{ steps.Action-Test.outputs.data }}
